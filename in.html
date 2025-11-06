@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Frontend Fun Full</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      overflow: hidden;
+    }
+
+    /* Floating Images (Password button) */
+    .floating-img {
+      position: absolute;
+      width: 120px; /* bigger size */
+      height: 120px;
+      animation: float 6s linear forwards;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.6)); /* bold & glowing */
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    button, input {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    /* Fire effect (alert part) */
+    .fire-img, .fire-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      display: none;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    }
+
+    .fire-img {
+      width: 200px;
+    }
+
+    .fire-video {
+      width: 320px;
+      height: 180px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Frontend Fun Demo 🎉</h1>
+
+  <!-- Button for Alert -->
+  <button onclick="showAlert()">Click Me</button>
+  <br>
+
+  <!-- Name Form -->
+  <input type="text" id="nameBox" placeholder="Enter your name">
+  <br>
+
+  <!-- Password Button -->
+  <button onclick="launchImages()">Password</button>
+
+  <!-- Audio -->
+  <audio id="clickSound">
+    <source src="https://www.soundjay.com/buttons/button-3.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Fire Image -->
+  <img id="fireImage" class="fire-img" src="https://assets.telegraphindia.com/telegraph/2022/Sep/1663229098_resized-6.jpg" alt="Fire">
+
+  <!-- Fire YouTube Video Embed -->
+  <iframe id="fireVideo" class="fire-video"
+    src="https://www.youtube.com/embed/UMoTZA0_ZsM?autoplay=1&controls=0" 
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+  <script>
+    // Alert + Fire Effect
+    function showAlert() {
+      alert("Maa ka bhosda aag....");
+
+      // Show fire image after alert
+      const fireImg = document.getElementById("fireImage");
+      fireImg.style.display = "block";
+
+      // Hide image after 2 seconds, then show video
+      setTimeout(() => {
+        fireImg.style.display = "none";
+
+        const fireVid = document.getElementById("fireVideo");
+        fireVid.style.display = "block";
+
+        // Hide video after 6 seconds
+        setTimeout(() => {
+          fireVid.style.display = "none";
+          // Reset iframe (so next time it restarts)
+          fireVid.src = fireVid.src;
+        }, 6000);
+
+      }, 2000);
+    }
+
+    // Play sound when name box is clicked
+    const nameBox = document.getElementById("nameBox");
+    const sound = document.getElementById("clickSound");
+
+    nameBox.addEventListener("click", () => {
+      sound.play();
+    });
+
+    // Launch floating HD images (Password button)
+    function launchImages() {
+      const images = [
+       "https://gaybodyblog.com/wp-content/uploads/2024/10/Reddit-Guys-Showing-Dick-1.jpg",
+        "https://adulto.vip/wp-content/uploads/2023/11/rolas-grossas-fotos-6.webp",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52w0Gu5T4iUc1nxXAe4eIFL_5dvJ6tB6TzA&s",
+       
+      ];
+
+      for (let i = 0; i < 8; i++) {
+        const img = document.createElement("img");
+        img.classList.add("floating-img");
+        img.src = images[Math.floor(Math.random() * images.length)];
+        img.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(img);
+
+        setTimeout(() => {
+          img.remove();
+        }, 6000);
+      }
+    }
+  </script>
+</body>
+</html>
